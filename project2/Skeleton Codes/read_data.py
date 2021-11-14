@@ -1,12 +1,14 @@
 import pandas as pd
 import numpy as np
+
 """
-MGT - 418 
+MGT - 418
 Convex Optimization - Project 2
 2021-2022 Fall
 Kernel Learning
 """
 np.random.seed(0)
+
 
 def prepare_ionosphere_dataset():
     df = pd.read_csv('ionosphere.data', sep=",", header=None)

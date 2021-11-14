@@ -9,20 +9,39 @@ source activate cvxpy
 
 ### Notes from tutorial solution code
 
-- tutorial4-ex1.py
+- `tutorial4-ex1.py`
 
-```
-# add nonnegativity constraints
-constr.extend([x >= 0, y >= 0])
+  ```python
+  # add nonnegativity constraints
+  constr.extend([x >= 0, y >= 0])
+  
+  # objectuve optimal value
+  print("Optimal = {}".format(objective.value))
+  ```
 
-# objectuve optimal value
-print("Optimal = {}".format(objective.value))
-```
+  - `constr += [condition]`与`constr.extend([condition])`等价
+  - `constr.append(condition)`则是另外一种写法
 
-- `constr += [condition]`与`constr.extend([condition])`等价
-- `constr.append(condition)`则是另外一种写法
+- `tutorial4-ex3.py`
 
+  ```python
+  """
+  ValueError: The input must be a single CVXPY Expression, not a list.
+  Combine Expressions using atoms such as bmat, hstack, and vstack.
+  l[0] >= cp.norm([p[0], 1], 2),
+  l[1] >= cp.norm([p[1] - p[0], 1], 2),
+  l[2] >= cp.norm([4 - p[1], 0.5], 2)
+  """
+  constr = [
+      l[0] >= cp.norm(cp.vstack([p[0], 1]), 2),
+      l[1] >= cp.norm(cp.vstack([p[1] - p[0], 1]), 2),
+      l[2] >= cp.norm(cp.vstack([4 - p[1], 0.5]), 2),
+  ]
+  ```
 
+  - symbolic: `v1 = cp.Parameter(pos=True)` or `eta_2 = cp.Parameter(nonneg=True)`
+
+### 
 
 ### Notes from external links
 
